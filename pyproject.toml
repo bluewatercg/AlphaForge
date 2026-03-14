@@ -1,0 +1,23 @@
+[project]
+name = "atlas-a"
+version = "0.1.0"
+description = "ATLAS-A: Self-improving AI stock picking agents for China A-shares"
+requires-python = ">=3.10"
+
+dependencies = [
+    "anthropic>=0.40.0",
+    "akshare>=1.18.0",
+    "pandas>=2.0.0",
+    "numpy>=1.24.0",
+    "jinja2>=3.1.0",
+    "pydantic>=2.0.0",
+    "python-dotenv>=1.0.0",
+    "aiohttp>=3.9.0",
+]
+
+[project.optional-dependencies]
+full = [
+    "apscheduler>=3.10.0",
+    "pyarrow>=14.0.0",
+    "gitpython>=3.1.0",
+]
