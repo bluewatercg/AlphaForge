@@ -1,12 +1,23 @@
 """ATLAS-A 全局配置"""
 
+import sys
 from pathlib import Path
 
 # === 项目路径 ===
-PROJECT_ROOT = Path(__file__).parent.parent
-PROMPTS_DIR = PROJECT_ROOT / "prompts"
-STATE_DIR = PROJECT_ROOT / "state"
-REPORTS_DIR = PROJECT_ROOT / "reports"
+# PyInstaller 打包后，数据文件在 sys._MEIPASS 中，运行时目录在 exe 旁边
+if getattr(sys, "frozen", False):
+    _BUNDLE_DIR = Path(sys._MEIPASS)
+    _EXE_DIR = Path(sys.executable).parent
+    PROJECT_ROOT = _EXE_DIR
+    PROMPTS_DIR = _BUNDLE_DIR / "prompts"
+    STATE_DIR = _EXE_DIR / "state"
+    REPORTS_DIR = _EXE_DIR / "reports"
+else:
+    PROJECT_ROOT = Path(__file__).parent.parent
+    PROMPTS_DIR = PROJECT_ROOT / "prompts"
+    STATE_DIR = PROJECT_ROOT / "state"
+    REPORTS_DIR = PROJECT_ROOT / "reports"
+
 CACHE_DIR = STATE_DIR / "cache"
 
 # === LLM ===

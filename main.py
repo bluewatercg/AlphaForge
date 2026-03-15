@@ -9,7 +9,10 @@ from datetime import datetime
 from pathlib import Path
 
 # 将项目根目录加入 Python 路径
-PROJECT_ROOT = Path(__file__).parent
+if getattr(sys, "frozen", False):
+    PROJECT_ROOT = Path(sys.executable).parent
+else:
+    PROJECT_ROOT = Path(__file__).parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
 from dotenv import load_dotenv
